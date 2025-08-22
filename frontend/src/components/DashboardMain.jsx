@@ -1,6 +1,7 @@
 import React from "react";
+import GaugeCard from "./GaugeCard";
 
-const DashboardMain = () => {
+const DashboardMain = ({ score = 0, onPredict }) => {
   return (
     <main className="main">
       <nav>
@@ -28,18 +29,8 @@ const DashboardMain = () => {
           marginBottom: "2.5rem",
         }}
       >
-        <div className="gauge-card">
-          <span className="gauge-label">
-            <span className="gauge-value">78</span>
-            <span
-              style={{ fontSize: "1.2rem", fontWeight: 600, color: "#fff" }}
-            >
-              {" "}
-              /100
-            </span>
-          </span>
-          <div className="gauge-desc">Your Score</div>
-        </div>
+        <GaugeCard value={score} maxValue={100} />
+
         <div className="card" style={{ minWidth: 150 }}>
           <div className="tag-list">
             <span className="tag">Tag 1</span>
@@ -51,6 +42,7 @@ const DashboardMain = () => {
             <span className="tag">Tag 7</span>
           </div>
         </div>
+
         <div className="upload-card card" style={{ minWidth: 210 }}>
           <div className="upload-box">
             <div style={{ fontSize: "1.1rem", fontWeight: 700 }}>
@@ -69,7 +61,11 @@ const DashboardMain = () => {
           <button className="upload-btn">Browse files</button>
         </div>
       </div>
-      <button className="predict-btn">Predict Exam Score</button>
+
+      {/* Button wired to trigger the prediction (if needed) */}
+      <button className="predict-btn" onClick={onPredict}>
+        Predict Exam Score
+      </button>
     </main>
   );
 };
