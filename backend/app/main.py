@@ -1,61 +1,82 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from typing import Dict, Any, Optional
+import joblib
+import os
+import numpy as np
 
-from .model import load_model, predict_from_input
+app = FastAPI()
 
-
-# ============================================================
-# FastAPI app
-# ============================================================
-
-app = FastAPI(
-    title="Academic Performance Predictor API",
-    description="API for predicting academic performance based on student habits",
-    version="2.0"
+# CORS allowing frontend origin
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],  # Adjust for your frontend host
+    allow_methods=["*"],
+    allow_headers=["*"]
 )
 
-# Load model + metadata at startup
-MODEL, META = load_model()
+# Load model pipeline
+MODEL_PATH = os.path.join(os.path.dirname(__file__), '../data/best_model.pkl')
+try:
+    model = joblib.load(MODEL_PATH)
+except Exception as e:
+    model = None
+    print(f"Error loading model: {e}")
 
-
-# ============================================================
-# Schemas
-# ============================================================
-
-class PredictInput(BaseModel):
-    study_hours: float
-    sleep_hours: float
-    extracurricular: float
+# Pydantic input schema matching dataset columns except target and student_id
+class StudentData(BaseModel):
+    age: float
+    gender: str
+    study_hours_per_day: float
     social_media_hours: float
-    attendance: float
-    gender: Optional[str] = None
-    extracurricular_participation: Optional[str] = None
-    parental_education_level: Optional[str] = None
-    diet_quality: Optional[str] = None
-    internet_quality: Optional[str] = None
-    part_time_job: Optional[str] = None
-
-
-class PredictOutput(BaseModel):
-    prediction: str
-    probability: Optional[float] = None
-    class_probabilities: Optional[Dict[str, float]] = None
-
-
-# ============================================================
-# Routes
-# ============================================================
+    netflix_hours: float
+    part_time_job: str
+    attendance_percentage: float
+    sleep_hours: float
+    diet_quality: str
+    exercise_frequency: int
+    parental_education_level: str
+    internet_quality: str
+    mental_health_rating: int
+    extracurricular_participation: str
 
 @app.get("/")
-def root():
-    return {"message": "Academic Performance Predictor API is running 🚀"}
+def read_root():
+    return {"message": "Academic Performance Prediction API"}
 
+@app.post("/api/predict")
+def predict(data: StudentData):
+    if model is None:
+        raise HTTPException(status_code=503, detail="Model is not loaded")
 
-@app.post("/predict", response_model=PredictOutput)
-def predict(payload: PredictInput):
+    # Convert input data to DataFrame
     try:
-        result = predict_from_input(MODEL, payload.dict(), META)
-        return result
+        input_df = {
+            'age': [data.age],
+            'gender': [data.gender],
+            'study_hours_per_day': [data.study_hours_per_day],
+            'social_media_hours': [data.social_media_hours],
+            'netflix_hours': [data.netflix_hours],
+            'part_time_job': [data.part_time_job],
+            'attendance_percentage': [data.attendance_percentage],
+            'sleep_hours': [data.sleep_hours],
+            'diet_quality': [data.diet_quality],
+            'exercise_frequency': [data.exercise_frequency],
+            'parental_education_level': [data.parental_education_level],
+            'internet_quality': [data.internet_quality],
+            'mental_health_rating': [data.mental_health_rating],
+            'extracurricular_participation': [data.extracurricular_participation]
+        }
+
+        import pandas as pd
+        input_data = pd.DataFrame(input_df)
     except Exception as e:
-        raise HTTPException(status_code=400, detail=str(e))
+        raise HTTPException(status_code=400, detail=f"Invalid input data: {e}")
+
+    try:
+        prediction = model.predict(input_data)
+        predicted_score = float(prediction[0])
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Prediction error: {e}")
+
+    return {"predicted_exam_score": round(predicted_score, 2)}
