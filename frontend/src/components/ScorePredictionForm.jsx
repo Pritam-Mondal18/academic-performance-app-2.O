@@ -17,9 +17,8 @@ const initialForm = {
   extracurricular_participation: "Yes",
 };
 
-const ScorePredictionForm = () => {
+const ScorePredictionForm = ({ onPrediction }) => {
   const [form, setForm] = useState(initialForm);
-  const [score, setScore] = useState(null);
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
 
@@ -34,17 +33,35 @@ const ScorePredictionForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setScore(null);
     setErr("");
     try {
+      // Prepare payload by explicitly converting numbers, ensuring no missing fields
+      const payload = {
+        age: Number(form.age),
+        gender: form.gender,
+        study_hours_per_day: Number(form.study_hours_per_day),
+        social_media_hours: Number(form.social_media_hours),
+        netflix_hours: Number(form.netflix_hours),
+        part_time_job: form.part_time_job,
+        attendance_percentage: Number(form.attendance_percentage),
+        sleep_hours: Number(form.sleep_hours),
+        diet_quality: form.diet_quality,
+        exercise_frequency: Number(form.exercise_frequency),
+        parental_education_level: form.parental_education_level,
+        internet_quality: form.internet_quality,
+        mental_health_rating: Number(form.mental_health_rating),
+        extracurricular_participation: form.extracurricular_participation,
+      };
+
       const response = await fetch("http://localhost:8000/api/predict", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify(payload),
       });
+
       const data = await response.json();
       if ("predicted_exam_score" in data) {
-        setScore(data.predicted_exam_score);
+        if (onPrediction) onPrediction(data.predicted_exam_score);
       } else {
         setErr(data.detail || "Prediction failed");
       }
@@ -55,8 +72,18 @@ const ScorePredictionForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{ display: "grid", gap: "1rem" }}>
-      {/* Age */}
+    <form
+      onSubmit={handleSubmit}
+      style={{
+        maxWidth: 420,
+        margin: "1rem auto",
+        padding: "1rem 2rem",
+        backgroundColor: "#222542",
+        borderRadius: "20px",
+        display: "grid",
+        gap: "1rem",
+      }}
+    >
       <label>
         Age:
         <input
@@ -70,7 +97,6 @@ const ScorePredictionForm = () => {
         />
       </label>
 
-      {/* Gender */}
       <label>
         Gender:
         <select
@@ -85,7 +111,6 @@ const ScorePredictionForm = () => {
         </select>
       </label>
 
-      {/* Study Hours Per Day */}
       <label>
         Study Hours Per Day:
         <input
@@ -100,7 +125,6 @@ const ScorePredictionForm = () => {
         />
       </label>
 
-      {/* Social Media Hours */}
       <label>
         Social Media Hours:
         <input
@@ -111,10 +135,10 @@ const ScorePredictionForm = () => {
           max={24}
           value={form.social_media_hours}
           onChange={handleChange}
+          required
         />
       </label>
 
-      {/* Netflix Hours */}
       <label>
         Netflix Hours:
         <input
@@ -125,10 +149,10 @@ const ScorePredictionForm = () => {
           max={24}
           value={form.netflix_hours}
           onChange={handleChange}
+          required
         />
       </label>
 
-      {/* Part Time Job */}
       <label>
         Part Time Job:
         <select
@@ -142,7 +166,6 @@ const ScorePredictionForm = () => {
         </select>
       </label>
 
-      {/* Attendance Percentage */}
       <label>
         Attendance Percentage:
         <input
@@ -157,7 +180,6 @@ const ScorePredictionForm = () => {
         />
       </label>
 
-      {/* Sleep Hours */}
       <label>
         Sleep Hours:
         <input
@@ -172,7 +194,6 @@ const ScorePredictionForm = () => {
         />
       </label>
 
-      {/* Diet Quality */}
       <label>
         Diet Quality:
         <select
@@ -187,7 +208,6 @@ const ScorePredictionForm = () => {
         </select>
       </label>
 
-      {/* Exercise Frequency */}
       <label>
         Exercise Frequency (per week):
         <input
@@ -201,7 +221,6 @@ const ScorePredictionForm = () => {
         />
       </label>
 
-      {/* Parental Education Level */}
       <label>
         Parental Education Level:
         <select
@@ -217,7 +236,6 @@ const ScorePredictionForm = () => {
         </select>
       </label>
 
-      {/* Internet Quality */}
       <label>
         Internet Quality:
         <select
@@ -232,7 +250,6 @@ const ScorePredictionForm = () => {
         </select>
       </label>
 
-      {/* Mental Health Rating */}
       <label>
         Mental Health Rating (1-10):
         <input
@@ -246,7 +263,6 @@ const ScorePredictionForm = () => {
         />
       </label>
 
-      {/* Extracurricular Participation */}
       <label>
         Extracurricular Participation:
         <select
@@ -264,14 +280,7 @@ const ScorePredictionForm = () => {
         {loading ? "Predicting..." : "Predict Exam Score"}
       </button>
 
-      {score !== null && (
-        <div
-          style={{ marginTop: "1rem", fontWeight: "bold", color: "#fd4a4a" }}
-        >
-          Predicted Exam Score: {score.toFixed(2)} / 100
-        </div>
-      )}
-      {err && <div style={{ marginTop: "1rem", color: "#b00020" }}>{err}</div>}
+      {err && <div style={{ color: "#b00020", fontWeight: 600 }}>{err}</div>}
     </form>
   );
 };

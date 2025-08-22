@@ -6,21 +6,24 @@ import ScorePredictionForm from "./components/ScorePredictionForm";
 function App() {
   const [predictedScore, setPredictedScore] = useState(0);
 
-  // This handler calls the backend via ScorePredictionForm and sets score in app state
-  const handlePredict = () => {
-    // Your logic here, or lifted from ScorePredictionForm
-  };
-
   return (
-    <div className="dashboard-layout">
+    <div style={{ display: "flex", minHeight: "100vh", background: "#181c2c" }}>
       <Sidebar />
-      <DashboardMain
-        score={predictedScore}
-        onPredict={handlePredict} // Wire button to start prediction
-      />
-      <ScorePredictionForm
-        onPrediction={(score) => setPredictedScore(score)} // Pass score from form
-      />
+      <main
+        style={{
+          flex: 1,
+          padding: "2rem 2.5rem",
+          display: "flex",
+          flexDirection: "column",
+          gap: "2rem",
+          minHeight: "100vh",
+        }}
+      >
+        <DashboardMain score={predictedScore} />
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          <ScorePredictionForm onPrediction={setPredictedScore} />
+        </div>
+      </main>
     </div>
   );
 }
