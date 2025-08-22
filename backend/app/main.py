@@ -3,16 +3,17 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import joblib
 import os
-import numpy as np
+import pandas as pd
 
 app = FastAPI()
 
-# CORS allowing frontend origin
+# CORS allowing frontend origin (change to your frontend URL and port)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # Adjust for your frontend host
+    allow_origins=["http://localhost:5173"],  # Example: Vite default frontend port
     allow_methods=["*"],
-    allow_headers=["*"]
+    allow_headers=["*"],
+    allow_credentials=True,
 )
 
 # Load model pipeline
@@ -23,7 +24,7 @@ except Exception as e:
     model = None
     print(f"Error loading model: {e}")
 
-# Pydantic input schema matching dataset columns except target and student_id
+# Pydantic input schema matching your dataset columns except target/student_id
 class StudentData(BaseModel):
     age: float
     gender: str
@@ -48,8 +49,6 @@ def read_root():
 def predict(data: StudentData):
     if model is None:
         raise HTTPException(status_code=503, detail="Model is not loaded")
-
-    # Convert input data to DataFrame
     try:
         input_df = {
             'age': [data.age],
@@ -67,8 +66,6 @@ def predict(data: StudentData):
             'mental_health_rating': [data.mental_health_rating],
             'extracurricular_participation': [data.extracurricular_participation]
         }
-
-        import pandas as pd
         input_data = pd.DataFrame(input_df)
     except Exception as e:
         raise HTTPException(status_code=400, detail=f"Invalid input data: {e}")
