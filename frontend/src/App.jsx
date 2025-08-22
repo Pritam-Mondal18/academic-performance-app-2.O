@@ -16,7 +16,6 @@ function App() {
           display: "flex",
           flexDirection: "column",
           gap: "2rem",
-          minHeight: "100vh",
         }}
       >
         <DashboardMain score={predictedScore} />

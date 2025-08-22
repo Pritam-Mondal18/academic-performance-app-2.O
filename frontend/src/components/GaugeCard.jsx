@@ -1,10 +1,7 @@
 import React from "react";
 
 const GaugeCard = ({ value = 0, maxValue = 100 }) => {
-  // Calculate the percentage for the progress ring (0-100%)
   const percentage = Math.min(Math.max(value, 0), maxValue) / maxValue;
-
-  // Circle properties for SVG circle gauge
   const radius = 70;
   const circumference = 2 * Math.PI * radius;
   const strokeDashoffset = circumference * (1 - percentage);
@@ -15,14 +12,14 @@ const GaugeCard = ({ value = 0, maxValue = 100 }) => {
         backgroundColor: "#232642",
         borderRadius: "24px",
         padding: "24px 32px",
-        width: 220,
-        height: 220,
+        minWidth: 220,
+        minHeight: 220,
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
         color: "#fd4a4a",
-        fontWeight: "700",
+        fontWeight: 700,
         boxShadow: "0 8px 24px #1a1f2baa",
       }}
     >
@@ -54,31 +51,31 @@ const GaugeCard = ({ value = 0, maxValue = 100 }) => {
             <stop offset="100%" stopColor="#673ab7" />
           </linearGradient>
         </defs>
+        {/* SCORE */}
         <text
           x="50%"
-          y="50%"
+          y="45%"
           dominantBaseline="middle"
           textAnchor="middle"
-          fontSize="36"
-          fill="#fff"
+          fontSize="44"
+          fill="#fd4a4a"
           fontWeight="bold"
-          dy="6"
         >
           {Math.round(value)}
         </text>
+        {/* /100 BELOW SCORE */}
         <text
           x="50%"
-          y="58%"
+          y="62%"
           dominantBaseline="middle"
           textAnchor="middle"
-          fontSize="18"
-          fill="#aaa"
+          fontSize="20"
+          fill="#fff"
         >
-          / {maxValue}
+          /{maxValue}
         </text>
       </svg>
-
-      <span style={{ marginTop: 14, fontSize: 16, color: "#aab4cc" }}>
+      <span style={{ marginTop: 16, fontSize: 18, color: "#aab4cc" }}>
         Your Score
       </span>
     </div>
