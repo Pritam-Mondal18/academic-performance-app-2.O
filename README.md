@@ -49,7 +49,7 @@ A full-stack web application that predicts student exam scores based on lifestyl
 
 ## Project Structure
 
-`.
+.
 ├── backend/
 │ ├── app/
 │ │ ├── main.py
@@ -67,7 +67,7 @@ A full-stack web application that predicts student exam scores based on lifestyl
 │ │ └── Sidebar.jsx
 │ ├── App.jsx
 │ └── main.jsx
-`
+
 
 
 ---
