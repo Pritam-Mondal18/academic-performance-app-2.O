@@ -68,3 +68,22 @@ A full-stack web application that predicts student exam scores based on lifestyl
 │ ├── App.jsx
 │ └── main.jsx
 `
+
+
+---
+
+## Installation
+
+### Prerequisites
+
+- Node.js & npm
+- Python 3.8+
+- pip
+
+---
+
+### Backend Setup
+
+1. Navigate to backend directory:
+
+
