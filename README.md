@@ -95,45 +95,45 @@ A full-stack web application that predicts student exam scores based on lifestyl
 ```bash cd backend```
 
 
-2. Create virtual environment and activate (recommended):
+2. Create virtual environment and activate (if required):
 ```bash
 python -m venv venv
 source venv/bin/activate # Windows: venv\Scripts\activate
 ```
 
 3. Install dependencies:
-
+```bash
 pip install -r requirements.txt
-
+```
 
 4. Optionally train the model:
-
+```bash
 python app/train_model.py
-
+```
 
 5. Run backend server:
-
+```bash
 uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
-
+```
 
 ---
 
 ## Frontend Setup
 
 1. Navigate to frontend directory:
-
+```bash
 cd frontend
-
+```
 
 2. Install dependencies:
-
+```bash
 npm install
-
+```
 
 3. Start frontend dev server:
-
+```bash
 npm run dev
-
+```
 
 4. Visit app at [http://localhost:5173](http://localhost:5173)
 
