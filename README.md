@@ -51,22 +51,26 @@ A full-stack web application that predicts student exam scores based on lifestyl
 
 .
 ├── backend/
-│ ├── app/
-│ │ ├── main.py
-│ │ ├── schemas.py
-│ │ └── train_model.py
-│ ├── data/
-│ │ ├── best_model.pkl
-│ │ └── student_habits_performance.csv
+│   ├── app/
+│   │   ├── main.py
+│   │   ├── schemas.py
+│   │   └── train_model.py
+│   └── data/
+│       ├── best_model.pkl
+│       └── student_habits_performance.csv
 └── frontend/
-├── src/
-│ ├── components/
-│ │ ├── DashboardMain.jsx
-│ │ ├── GaugeCard.jsx
-│ │ ├── ScorePredictionForm.jsx
-│ │ └── Sidebar.jsx
-│ ├── App.jsx
-│ └── main.jsx
+    ├── src/
+    │   ├── components/
+    │   │   ├── DashboardMain.jsx
+    │   │   ├── GaugeCard.jsx
+    │   │   ├── ScorePredictionForm.jsx
+    │   │   └── Sidebar.jsx
+    │   ├── App.jsx
+    │   └── main.jsx
+├── .gitignore
+├── LICENSE
+└── README.md
+
 
 
 
