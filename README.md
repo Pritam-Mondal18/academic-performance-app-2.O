@@ -80,25 +80,26 @@ A full-stack web application that predicts student exam scores based on lifestyl
 ## Installation
 
 ### Prerequisites
+``` bash
 
 - Node.js & npm
 - Python 3.8+
 - pip
-
+```
 ---
 
 ### Backend Setup
 
 1. Navigate to backend directory:
 
-``` cd backend```
+```bash cd backend```
 
 
 2. Create virtual environment and activate (recommended):
-
+```bash
 python -m venv venv
 source venv/bin/activate # Windows: venv\Scripts\activate
-
+```
 
 3. Install dependencies:
 
