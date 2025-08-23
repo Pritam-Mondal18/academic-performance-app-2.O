@@ -49,6 +49,7 @@ A full-stack web application that predicts student exam scores based on lifestyl
 
 ## Project Structure
 
+```
 .
 ├── backend/
 │   ├── app/
@@ -70,7 +71,7 @@ A full-stack web application that predicts student exam scores based on lifestyl
 ├── .gitignore
 ├── LICENSE
 └── README.md
-
+```
 
 
 
