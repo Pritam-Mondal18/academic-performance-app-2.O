@@ -91,7 +91,7 @@ A full-stack web application that predicts student exam scores based on lifestyl
 
 1. Navigate to backend directory:
 
-### cd backend
+``` cd backend```
 
 
 2. Create virtual environment and activate (recommended):
