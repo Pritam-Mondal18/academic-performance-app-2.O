@@ -1,3 +1,4 @@
+/* ========== BASE FORM ========== */
 .score-form {
   max-width: 900px;
   margin: 2rem auto;
@@ -7,9 +8,21 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1.4rem 2rem;
+
+  /* Unified font */
+  font-family: "Poppins", "Segoe UI", sans-serif;
   color: #1c2040;
+  font-size: 1rem; /* base font size */
+  line-height: 1.4;
 }
 
+/* ========== DARK MODE VARIANT ========== */
+.score-form.dark {
+  background: linear-gradient(145deg, #232642, #1a1c2e);
+  color: #f2f2f2;
+}
+
+/* ========== FIELD GROUP ========== */
 .field {
   display: flex;
   flex-direction: column;
@@ -18,24 +31,35 @@
 .field label {
   margin-bottom: 0.4rem;
   font-weight: 600;
-  color: #1c2040;
+  font-size: 1rem; /* label font size */
+  color: inherit; /* inherits from .score-form color */
 }
 
 .field input,
 .field select {
-  padding: 0.63rem 1rem;
+  padding: 0.7rem 1rem;
   background: #ffffffc7;
   border: 1.8px solid #303458;
   color: #1c2040;
   border-radius: 14px;
-  font-size: 1rem;
+  font-size: 1rem; /* input text size */
   outline: none;
+  font-family: inherit; /* inherit from .score-form */
 }
 
+/* Dark mode input/select */
+.score-form.dark .field input,
+.score-form.dark .field select {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1.8px solid #b3b5c6;
+  color: #ffffff;
+}
+
+/* ========== SUBMIT BUTTON ========== */
 .submit-btn {
   grid-column: span 4;
-  padding: 0.9rem 0;
-  font-size: 1.1rem;
+  padding: 1rem 0;
+  font-size: 1.1rem; /* button text size */
   font-weight: 700;
   border-radius: 18px;
   border: none;
@@ -48,12 +72,48 @@
   justify-content: center;
   align-items: center;
   gap: 0.6rem;
+  font-family: inherit;
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+.submit-btn:hover {
+  transform: translateY(-2px);
+}
+.submit-btn:active {
+  transform: translateY(0);
 }
 
+/* Dark mode button variant (optional lighter gradient) */
+.score-form.dark .submit-btn {
+  background: linear-gradient(90deg, #7c3aed 35%, #5a69f7 100%);
+}
+
+/* ========== ERROR MESSAGE ========== */
 .error {
   grid-column: span 4;
   color: #ff7272;
   font-weight: 700;
   margin-top: 0.8rem;
   text-align: center;
+  font-size: 0.95rem;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 768px) {
+  .score-form {
+    grid-template-columns: repeat(2, 1fr);
+    font-size: 0.95rem;
+  }
+  .submit-btn {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 480px) {
+  .score-form {
+    grid-template-columns: 1fr;
+    font-size: 0.9rem;
+  }
+  .submit-btn {
+    grid-column: span 1;
+  }
 }

@@ -19,7 +19,7 @@ const initialForm = {
   extracurricular_participation: "Yes",
 };
 
-const ScorePredictionForm = ({ onPrediction }) => {
+const ScorePredictionForm = ({ onPrediction, darkMode }) => {
   const [form, setForm] = useState(initialForm);
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
@@ -170,7 +170,10 @@ const ScorePredictionForm = ({ onPrediction }) => {
   ];
 
   return (
-    <form className="score-form" onSubmit={handleSubmit}>
+    <form
+      className={`score-form ${darkMode ? "dark" : "light"}`}
+      onSubmit={handleSubmit}
+    >
       {fields.map(({ label, name, type, min, max, step, options }) => (
         <div key={name} className="field">
           <label>{label}:</label>
