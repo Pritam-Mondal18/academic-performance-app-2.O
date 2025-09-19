@@ -5,7 +5,7 @@ import "./Header.css";
 const Header = ({ darkMode, toggleDarkMode }) => {
   return (
     <header className={`header ${darkMode ? "dark" : "light"}`}>
-      <h1 className="logo">📊 Score Predictor</h1>
+      <h1 className="logo">📊 EduSphere</h1>
       <nav>
         <ul className="nav-links">
           <li>
