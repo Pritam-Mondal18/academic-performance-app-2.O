@@ -3,6 +3,8 @@
 A full-stack web application that predicts student exam scores based on lifestyle, study habits, and demographics using a machine learning model served via an API.
 
 ---
+![Alt text for screen readers](ss.png)
+
 
 ## Table of Contents
 
