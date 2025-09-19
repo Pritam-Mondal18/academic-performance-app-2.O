@@ -49,8 +49,7 @@ const DashboardMain = ({ score = 0, darkMode }) => {
       <div className={`title-card ${darkMode ? "dark" : "light"}`}>
         <h1>🎓 Academic Performance Predictor</h1>
         <div className="subtitle">
-          Modern assistant-style UI to predict exam scores and suggest an
-          effective path forward.
+          Shaping Modern Kids with Future-Ready Educational Solutions
         </div>
       </div>
 

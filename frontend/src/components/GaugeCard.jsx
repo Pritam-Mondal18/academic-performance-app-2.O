@@ -1,17 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./GaugeCard.css";
 
 const GaugeCard = ({ value = 0, maxValue = 100, darkMode }) => {
-  const percentage = Math.min(Math.max(value, 0), maxValue) / maxValue;
+  const [displayValue, setDisplayValue] = useState(0);
+
+  // Animate the score from 0 → value
+  useEffect(() => {
+    let start = 0;
+    const duration = 1000; // 1 second
+    const stepTime = Math.abs(Math.floor(duration / value || 1));
+
+    const counter = setInterval(() => {
+      start += 1;
+      if (start >= value) {
+        start = value;
+        clearInterval(counter);
+      }
+      setDisplayValue(start);
+    }, stepTime);
+
+    return () => clearInterval(counter);
+  }, [value]);
+
+  const percentage = Math.min(Math.max(displayValue, 0), maxValue) / maxValue;
   const radius = 70;
   const circumference = 2 * Math.PI * radius;
   const strokeDashoffset = circumference * (1 - percentage);
 
   return (
     <div className={`gauge-card ${darkMode ? "dark" : "light"}`}>
-      <svg width={180} height={180}>
+      {/* Tooltip */}
+      <div className="tooltip">Predicted exam score based on your inputs</div>
+
+      <svg width={180} height={180} className="gauge-svg">
         <circle
-          stroke={darkMode ? "#4a4b6a" : "#ccc"}
+          className="gauge-bg"
           fill="transparent"
           strokeWidth={10}
           r={radius}
@@ -19,7 +42,7 @@ const GaugeCard = ({ value = 0, maxValue = 100, darkMode }) => {
           cy={90}
         />
         <circle
-          stroke="url(#gradient)"
+          className="gauge-progress"
           fill="transparent"
           strokeWidth={10}
           strokeLinecap="round"
@@ -28,7 +51,6 @@ const GaugeCard = ({ value = 0, maxValue = 100, darkMode }) => {
           r={radius}
           cx={90}
           cy={90}
-          style={{ transition: "stroke-dashoffset 0.5s ease" }}
         />
         <defs>
           <linearGradient id="gradient" x1="1" y1="0" x2="0" y2="1">
@@ -37,6 +59,7 @@ const GaugeCard = ({ value = 0, maxValue = 100, darkMode }) => {
             <stop offset="100%" stopColor="#673ab7" />
           </linearGradient>
         </defs>
+
         {/* SCORE */}
         <text
           x="50%"
@@ -44,23 +67,24 @@ const GaugeCard = ({ value = 0, maxValue = 100, darkMode }) => {
           dominantBaseline="middle"
           textAnchor="middle"
           fontSize="44"
-          fill="#fd4a4a"
-          fontWeight="bold"
+          className="gauge-score"
         >
-          {Math.round(value)}
+          {Math.round(displayValue)}
         </text>
-        {/* /100 */}
+
+        {/* /100 BELOW SCORE */}
         <text
           x="50%"
           y="62%"
           dominantBaseline="middle"
           textAnchor="middle"
           fontSize="20"
-          fill={darkMode ? "#fff" : "#333"}
+          className="gauge-max"
         >
           /{maxValue}
         </text>
       </svg>
+
       <span className="gauge-label">Your Score</span>
     </div>
   );
