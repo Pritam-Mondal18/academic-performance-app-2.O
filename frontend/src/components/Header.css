@@ -9,21 +9,34 @@
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
 }
 
+/* Dark / Light */
 .header.dark {
   background: #1f2233;
   color: #fff;
 }
-
 .header.light {
   background: #f5f5f5;
   color: #222;
 }
 
+/* Logo with image + text */
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.logo-img {
+  height: 100px;
+  /* width: auto; */
+  border-radius: 8px;
+}
 .logo {
   margin: 0;
   font-weight: 800;
+  font-size: 1.5rem;
 }
 
+/* Navigation */
 .nav-links {
   display: flex;
   gap: 2rem;
@@ -31,18 +44,17 @@
   margin: 0;
   padding: 0;
 }
-
 .nav-link {
   text-decoration: none;
   color: inherit;
   font-weight: 600;
   transition: color 0.3s;
 }
-
 .nav-link:hover {
   color: #6d6afa;
 }
 
+/* Dark/Light Mode Button */
 .mode-toggle {
   padding: 0.5rem 1rem;
   border-radius: 12px;
@@ -50,13 +62,24 @@
   cursor: pointer;
   font-weight: 600;
 }
-
 .header.dark .mode-toggle {
   background: #fff;
   color: #222;
 }
-
 .header.light .mode-toggle {
   background: #222;
   color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nav-links {
+    gap: 1rem;
+  }
+  .logo-img {
+    height: 38px;
+  }
+  .logo {
+    font-size: 1.2rem;
+  }
 }
