@@ -39,16 +39,20 @@ function App() {
       className={darkMode ? "dark-mode" : "light-mode"}
       style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}
     >
+      {/* Header */}
       <Header
         darkMode={darkMode}
         toggleDarkMode={() => setDarkMode(!darkMode)}
       />
 
-      {loading && <Loader />}
+      {/* Global Loader */}
+      {loading && <Loader overlay darkMode={darkMode} />}
 
+      {/* Main Content */}
       <main style={{ flex: 1, padding: "2rem" }}>
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>
+            {/* Home */}
             <Route
               path="/"
               element={
@@ -59,13 +63,18 @@ function App() {
                   variants={pageVariants}
                   transition={pageTransition}
                 >
-                  <DashboardMain score={predictedScore} />
+                  <DashboardMain score={predictedScore} darkMode={darkMode} />
                   <div style={{ display: "flex", justifyContent: "center" }}>
-                    <ScorePredictionForm onPrediction={setPredictedScore} />
+                    <ScorePredictionForm
+                      onPrediction={setPredictedScore}
+                      darkMode={darkMode}
+                    />
                   </div>
                 </motion.div>
               }
             />
+
+            {/* About */}
             <Route
               path="/about"
               element={
@@ -76,10 +85,12 @@ function App() {
                   variants={pageVariants}
                   transition={pageTransition}
                 >
-                  <About />
+                  <About darkMode={darkMode} />
                 </motion.div>
               }
             />
+
+            {/* Contact */}
             <Route
               path="/contact"
               element={
@@ -90,7 +101,7 @@ function App() {
                   variants={pageVariants}
                   transition={pageTransition}
                 >
-                  <Contact />
+                  <Contact darkMode={darkMode} />
                 </motion.div>
               }
             />
@@ -98,6 +109,7 @@ function App() {
         </AnimatePresence>
       </main>
 
+      {/* Footer */}
       <Footer darkMode={darkMode} />
     </div>
   );

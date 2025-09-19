@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Loader from "./Loader"; // ✅ import reusable Loader
 
 const initialForm = {
   age: 20,
@@ -238,6 +239,7 @@ const ScorePredictionForm = ({ onPrediction }) => {
         </div>
       ))}
 
+      {/* Submit Button with inline loader */}
       <button
         type="submit"
         disabled={loading}
@@ -253,9 +255,17 @@ const ScorePredictionForm = ({ onPrediction }) => {
           cursor: "pointer",
           boxShadow: "0 4px 18px #222242bb",
           marginTop: "1rem",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: "0.6rem",
         }}
       >
-        {loading ? "Predicting..." : "Predict Exam Score"}
+        {loading ? (
+          <Loader overlay={false} size="small" />
+        ) : (
+          "Predict Exam Score"
+        )}
       </button>
 
       {err && (
