@@ -1,31 +1,17 @@
 import React from "react";
+import "./GaugeCard.css";
 
-const GaugeCard = ({ value = 0, maxValue = 100 }) => {
+const GaugeCard = ({ value = 0, maxValue = 100, darkMode }) => {
   const percentage = Math.min(Math.max(value, 0), maxValue) / maxValue;
   const radius = 70;
   const circumference = 2 * Math.PI * radius;
   const strokeDashoffset = circumference * (1 - percentage);
 
   return (
-    <div
-      style={{
-        backgroundColor: "#232642",
-        borderRadius: "24px",
-        padding: "24px 32px",
-        minWidth: 220,
-        minHeight: 220,
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        color: "#fd4a4a",
-        fontWeight: 700,
-        boxShadow: "0 8px 24px #1a1f2baa",
-      }}
-    >
+    <div className={`gauge-card ${darkMode ? "dark" : "light"}`}>
       <svg width={180} height={180}>
         <circle
-          stroke="#4a4b6a"
+          stroke={darkMode ? "#4a4b6a" : "#ccc"}
           fill="transparent"
           strokeWidth={10}
           r={radius}
@@ -63,21 +49,19 @@ const GaugeCard = ({ value = 0, maxValue = 100 }) => {
         >
           {Math.round(value)}
         </text>
-        {/* /100 BELOW SCORE */}
+        {/* /100 */}
         <text
           x="50%"
           y="62%"
           dominantBaseline="middle"
           textAnchor="middle"
           fontSize="20"
-          fill="#fff"
+          fill={darkMode ? "#fff" : "#333"}
         >
           /{maxValue}
         </text>
       </svg>
-      <span style={{ marginTop: 16, fontSize: 18, color: "#aab4cc" }}>
-        Your Score
-      </span>
+      <span className="gauge-label">Your Score</span>
     </div>
   );
 };
