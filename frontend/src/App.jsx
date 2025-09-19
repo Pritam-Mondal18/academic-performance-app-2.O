@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import DashboardMain from "./components/DashboardMain";
@@ -7,6 +7,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import About from "./components/About";
 import Contact from "./components/Contact";
+import Loader from "./components/Loader";
 
 const pageVariants = {
   initial: { opacity: 0, x: 50 },
@@ -23,7 +24,15 @@ const pageTransition = {
 function App() {
   const [predictedScore, setPredictedScore] = useState(0);
   const [darkMode, setDarkMode] = useState(true);
+  const [loading, setLoading] = useState(false);
   const location = useLocation();
+
+  // Trigger loader on route change
+  useEffect(() => {
+    setLoading(true);
+    const timer = setTimeout(() => setLoading(false), 600); // 0.6s loader
+    return () => clearTimeout(timer);
+  }, [location.pathname]);
 
   return (
     <div
@@ -34,6 +43,8 @@ function App() {
         darkMode={darkMode}
         toggleDarkMode={() => setDarkMode(!darkMode)}
       />
+
+      {loading && <Loader />}
 
       <main style={{ flex: 1, padding: "2rem" }}>
         <AnimatePresence mode="wait">
