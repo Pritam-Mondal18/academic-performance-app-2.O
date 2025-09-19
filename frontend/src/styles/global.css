@@ -1,4 +1,4 @@
-body {
+/* body {
   margin: 0;
   padding: 0;
   font-family: "Inter", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -15,7 +15,7 @@ body {
   display: flex;
 }
 
-/* Sidebar */
+/* Sidebar */ /*
 .sidebar {
   width: 280px;
   background: #222542;
@@ -73,7 +73,7 @@ body {
   color: #fc5d5d;
 }
 
-/* Sidebar select (dropdown) */
+/* Sidebar select (dropdown) */ /*
 .sidebar select {
   padding: 0.47rem 0.7rem;
   border-radius: 9px;
@@ -84,7 +84,7 @@ body {
   margin-top: 0.42rem;
 }
 
-/* Main dashboard */
+/* Main dashboard */ /*
 .main {
   flex: 1;
   padding: 2.3rem 2rem;
@@ -147,7 +147,7 @@ nav li:hover {
   margin-bottom: 0.4rem;
 }
 
-/* Simple Gauge Chart style */
+/* Simple Gauge Chart style */ /*
 .gauge-card {
   display: flex;
   justify-content: center;
@@ -172,7 +172,7 @@ nav li:hover {
   color: #bdbfff;
 }
 
-/* Tag List */
+/* Tag List */ /*
 .tag-list {
   display: flex;
   flex-direction: column;
@@ -213,7 +213,7 @@ nav li:hover {
   color: #00acc1;
 }
 
-/* Upload Box */
+/* Upload Box */ /*
 .upload-card {
   min-height: 190px;
   display: flex;
@@ -265,4 +265,27 @@ nav li:hover {
 }
 .predict-btn:hover {
   background: linear-gradient(89deg, #6d6afa 50%, #232642 100%);
+} */
+
+body {
+  margin: 0;
+  font-family: "Inter", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.dark-mode {
+  background: #181c2c;
+  color: #eef2fb;
+}
+
+.light-mode {
+  background: #fafafa;
+  color: #222;
+}
+
+a {
+  color: #6d6afa;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
 }
