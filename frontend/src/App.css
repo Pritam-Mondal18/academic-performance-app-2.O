@@ -1,43 +1,62 @@
+/* App.css */
+
+/* Body background is set dynamically in App.js */
 body {
   margin: 0;
+  transition: background 0.4s ease;
+  min-height: 100vh;
 }
 
+/* Main container */
 .app-container {
   position: relative;
-  overflow: hidden; /* This is now needed here to clip the curves */
+  overflow: hidden;
+  min-height: 100vh; /* full height always */
 }
 
-/* Background Curve Designs */
+/* Big gradient waves across entire screen */
 .app-container::before,
 .app-container::after {
   content: "";
   position: absolute;
-  border-radius: 50%;
-  z-index: -1; /* Puts the curves in the background */
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  border-radius: 45%;
+  transform: rotate(25deg);
+  z-index: -1;
+  animation: moveWaves 60s linear infinite; /* slow drift */
 }
 
+/* Light mode background shapes */
 .app-container.light-mode::before,
 .app-container.light-mode::after {
-  background: linear-gradient(to right, #c2e0f5, #e8c6f2);
-  filter: opacity(0.5); /* Adjust opacity for the faded effect */
+  background: radial-gradient(circle at 30% 30%, #c2e0f5 0%, #e8c6f2 100%);
+  opacity: 0.4;
 }
 
+/* Dark mode background shapes */
 .app-container.dark-mode::before,
 .app-container.dark-mode::after {
-  background: linear-gradient(to right, #444a77, #664a77);
-  filter: opacity(0.3);
+  background: radial-gradient(circle at 30% 30%, #444a77 0%, #664a77 100%);
+  opacity: 0.2;
 }
 
-.app-container::before {
-  width: 400px;
-  height: 400px;
-  top: -150px;
-  left: -200px;
+@keyframes moveWaves {
+  0% {
+    transform: rotate(25deg) translate(0, 0);
+  }
+  50% {
+    transform: rotate(25deg) translate(-20%, -10%);
+  }
+  100% {
+    transform: rotate(25deg) translate(0, 0);
+  }
 }
 
-.app-container::after {
-  width: 500px;
-  height: 500px;
-  top: -200px;
-  right: -250px;
+/* Optional: style inner content spacing */
+main {
+  position: relative;
+  z-index: 1;
 }

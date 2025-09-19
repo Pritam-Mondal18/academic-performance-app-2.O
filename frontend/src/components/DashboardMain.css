@@ -34,7 +34,7 @@
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
 }
 .title-card.dark {
-  background: linear-gradient(145deg, #232642, #1a1c2e);
+  background: linear-gradient(145deg, #1f2233, #1a1c2e);
   color: #fff;
 }
 .title-card.light {
