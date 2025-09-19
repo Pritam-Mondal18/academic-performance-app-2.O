@@ -1,0 +1,59 @@
+.score-form {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: linear-gradient(to right, #c2e0f5, #e8c6f2);
+  border-radius: 20px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.4rem 2rem;
+  color: #1c2040;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+}
+
+.field label {
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+  color: #1c2040;
+}
+
+.field input,
+.field select {
+  padding: 0.63rem 1rem;
+  background: #ffffffc7;
+  border: 1.8px solid #303458;
+  color: #1c2040;
+  border-radius: 14px;
+  font-size: 1rem;
+  outline: none;
+}
+
+.submit-btn {
+  grid-column: span 4;
+  padding: 0.9rem 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border-radius: 18px;
+  border: none;
+  background: linear-gradient(90deg, #5a69f7 35%, #7c3aed 100%);
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 4px 18px #222242bb;
+  margin-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.error {
+  grid-column: span 4;
+  color: #ff7272;
+  font-weight: 700;
+  margin-top: 0.8rem;
+  text-align: center;
+}

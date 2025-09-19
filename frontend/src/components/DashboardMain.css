@@ -3,6 +3,7 @@
   flex-direction: column;
   gap: 2rem;
   padding: 0 1rem;
+  position: relative;
 }
 
 /* Banner */
@@ -24,11 +25,11 @@
   border-radius: 22px;
   padding: 2rem;
   margin-bottom: 1.2rem;
-  min-height: 160px; /* Fixed height */
+  min-height: 160px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  text-align: center; /* Center content */
+  text-align: center;
   transition: background 0.3s, color 0.3s, box-shadow 0.3s;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
 }
@@ -37,19 +38,22 @@
   color: #fff;
 }
 .title-card.light {
-  background: #fafafa;
+  background: linear-gradient(to right, #c2e0f5, #e8c6f2);
   color: #222;
 }
 .title-card h1 {
   margin: 0;
-  font-size: 2rem;
+  font-family: "Joella", cursive;
+  font-size: 2.2rem;
   font-weight: 800;
 }
 .title-card.dark .subtitle {
   color: #b3b5c6;
+  font-size: 1.1rem;
 }
 .title-card.light .subtitle {
   color: #555;
+  font-size: 1.1rem;
 }
 
 /* Content row */
@@ -57,7 +61,7 @@
   display: flex;
   gap: 2rem;
   justify-content: center;
-  align-items: stretch; /* Make children equal height */
+  align-items: stretch;
   margin-bottom: 2rem;
   flex-wrap: wrap;
 }
@@ -81,11 +85,11 @@
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
 }
 .upload-card.dark {
-  background: linear-gradient(145deg, #232642, #1a1c2e);
+  background: #2b2e4b;
   color: #fff;
 }
 .upload-card.light {
-  background: #fff;
+  background: linear-gradient(to right, #c2e0f5, #e8c6f2);
   color: #222;
   border: 1px solid #e0e0e0;
 }
@@ -110,10 +114,12 @@
 .upload-title {
   font-size: 1.15rem;
   font-weight: 700;
+  font-family: "Superstar", sans-serif;
 }
 .upload-sub {
   font-size: 0.95rem;
   margin-top: 0.4rem;
+  font-family: "Superstar", sans-serif;
 }
 
 /* Upload button */
@@ -128,6 +134,7 @@
   cursor: pointer;
   transition: background 0.3s, transform 0.2s;
   box-shadow: 0 6px 18px rgba(35, 38, 66, 0.45);
+  font-family: "Superstar", sans-serif;
 }
 .upload-btn:hover {
   background: linear-gradient(90deg, #7c3aed 0%, #5a69f7 100%);
@@ -137,10 +144,41 @@
   transform: translateY(0);
 }
 
+/* existing styles remain the same */
+
+/* color for "Academic" and "Performance Predictor" */
+.edu {
+  color: #2d60f5; /* like Edu colour */
+}
+.sphere {
+  color: #7c3aed; /* like Sphere colour */
+}
+
+/* typing animation styles */
+.typed {
+  display: inline-block;
+  border-right: 2px solid #444; /* blinking cursor */
+  white-space: nowrap;
+  overflow: hidden;
+  animation: blinkCursor 0.7s steps(1) infinite;
+}
+
+@keyframes blinkCursor {
+  0% {
+    border-color: transparent;
+  }
+  50% {
+    border-color: #444;
+  }
+  100% {
+    border-color: transparent;
+  }
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .title-card h1 {
-    font-size: 1.6rem;
+    font-size: 1.8rem;
   }
   .content-row {
     flex-direction: column;

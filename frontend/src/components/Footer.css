@@ -2,6 +2,7 @@
   padding: 1rem;
   text-align: center;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-family: "Superstar", sans-serif;
 }
 
 .footer.dark {
@@ -10,6 +11,6 @@
 }
 
 .footer.light {
-  background: #f5f5f5;
+  background: linear-gradient(to right, #c2e0f5, #e8c6f2);
   color: #222;
 }

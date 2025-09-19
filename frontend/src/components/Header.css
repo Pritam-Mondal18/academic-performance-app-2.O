@@ -7,6 +7,8 @@
   top: 0;
   z-index: 100;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  position: relative; /* Added for pseudo-element positioning */
+  overflow: hidden; /* Added to hide parts of the curve */
 }
 
 /* Dark / Light */
@@ -15,8 +17,26 @@
   color: #fff;
 }
 .header.light {
-  background: #f5f5f5;
+  background: linear-gradient(to right, #c2e0f5, #e8c6f2);
   color: #222;
+}
+
+/* Curve design for header */
+.header::before {
+  content: "";
+  position: absolute;
+  top: -150px;
+  left: -200px;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  z-index: -1;
+}
+.header.light::before {
+  background: rgba(255, 255, 255, 0.4);
+}
+.header.dark::before {
+  background: rgba(255, 255, 255, 0.05);
 }
 
 /* Logo with image + text */
@@ -27,13 +47,13 @@
 }
 .logo-img {
   height: 100px;
-  /* width: auto; */
   border-radius: 8px;
 }
 .logo {
   margin: 0;
   font-weight: 800;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
+  font-family: "Joella", cursive;
 }
 
 /* Navigation */
@@ -49,6 +69,8 @@
   color: inherit;
   font-weight: 600;
   transition: color 0.3s;
+  font-size: 1.1rem;
+  font-family: "Superstar", sans-serif;
 }
 .nav-link:hover {
   color: #6d6afa;
@@ -61,6 +83,8 @@
   border: none;
   cursor: pointer;
   font-weight: 600;
+  font-family: "Superstar", sans-serif;
+  font-size: 1rem;
 }
 .header.dark .mode-toggle {
   background: #fff;
@@ -80,6 +104,6 @@
     height: 38px;
   }
   .logo {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
   }
 }

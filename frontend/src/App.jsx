@@ -8,6 +8,7 @@ import Footer from "./components/Footer";
 import About from "./components/About";
 import Contact from "./components/Contact";
 import Loader from "./components/Loader";
+import "./App.css"; // Ensure you have this import
 
 const pageVariants = {
   initial: { opacity: 0, x: 50 },
@@ -27,32 +28,24 @@ function App() {
   const [loading, setLoading] = useState(false);
   const location = useLocation();
 
-  // Trigger loader on route change
   useEffect(() => {
     setLoading(true);
-    const timer = setTimeout(() => setLoading(false), 600); // 0.6s loader
+    const timer = setTimeout(() => setLoading(false), 600);
     return () => clearTimeout(timer);
   }, [location.pathname]);
 
   return (
-    <div
-      className={darkMode ? "dark-mode" : "light-mode"}
-      style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}
-    >
-      {/* Header */}
+    <div className={`app-container ${darkMode ? "dark-mode" : "light-mode"}`}>
       <Header
         darkMode={darkMode}
         toggleDarkMode={() => setDarkMode(!darkMode)}
       />
 
-      {/* Global Loader */}
       {loading && <Loader overlay darkMode={darkMode} />}
 
-      {/* Main Content */}
       <main style={{ flex: 1, padding: "2rem" }}>
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>
-            {/* Home */}
             <Route
               path="/"
               element={
@@ -74,7 +67,6 @@ function App() {
               }
             />
 
-            {/* About */}
             <Route
               path="/about"
               element={
@@ -90,7 +82,6 @@ function App() {
               }
             />
 
-            {/* Contact */}
             <Route
               path="/contact"
               element={
@@ -109,7 +100,6 @@ function App() {
         </AnimatePresence>
       </main>
 
-      {/* Footer */}
       <Footer darkMode={darkMode} />
     </div>
   );

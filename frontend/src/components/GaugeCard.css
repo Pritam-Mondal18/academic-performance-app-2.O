@@ -1,5 +1,6 @@
 .gauge-card {
   position: relative;
+  overflow: hidden;
   flex: 1;
   min-width: 280px;
   max-width: 380px;
@@ -14,15 +15,33 @@
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
   cursor: pointer;
 }
-
 .gauge-card.dark {
-  background: linear-gradient(145deg, #232642, #1a1c2e);
+  background: #2b2e4b;
   color: #fff;
 }
 .gauge-card.light {
-  background: #fff;
+  background: linear-gradient(to right, #c2e0f5, #e8c6f2);
   color: #222;
   border: 1px solid #e0e0e0;
+}
+
+/* Curved design */
+.gauge-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  border-radius: 22px;
+  transform: rotate(-10deg) scale(1.15) translateY(-50px) translateX(-40px);
+}
+.gauge-card.light::before {
+  background: rgba(255, 255, 255, 0.2);
+}
+.gauge-card.dark::before {
+  background: rgba(140, 100, 200, 0.1);
 }
 
 .gauge-card:hover {
@@ -44,6 +63,8 @@
   pointer-events: none;
   transition: opacity 0.25s ease;
   white-space: nowrap;
+  font-family: "Superstar", sans-serif;
+  z-index: 2;
 }
 .gauge-card.light .tooltip {
   background: rgba(50, 50, 50, 0.85);
@@ -54,26 +75,35 @@
 
 /* SVG background ring */
 .gauge-bg {
+  position: relative;
+  z-index: 2;
   stroke: #4a4b6a;
 }
 .gauge-card.light .gauge-bg {
-  stroke: #ddd;
+  stroke: #4a4b6a;
 }
 
 /* SVG progress ring */
 .gauge-progress {
   stroke: url(#gradient);
   transition: stroke-dashoffset 0.5s ease;
+  z-index: 2;
 }
 
 /* Score text */
 .gauge-score {
   fill: #fd4a4a;
   font-weight: bold;
+  font-size: 3rem;
+  font-family: "Joella", cursive;
+  z-index: 2;
 }
 .gauge-max {
   fill: currentColor;
   opacity: 0.9;
+  font-size: 1.2rem;
+  font-family: "Superstar", sans-serif;
+  z-index: 2;
 }
 
 /* Label below gauge */
@@ -83,6 +113,8 @@
   font-weight: 600;
   color: inherit;
   opacity: 0.85;
+  font-family: "Superstar", sans-serif;
+  z-index: 2;
 }
 
 /* Responsive */

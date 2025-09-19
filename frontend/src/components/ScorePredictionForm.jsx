@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Loader from "./Loader"; // ✅ import reusable Loader
+import "./ScorePredictionForm.css";
 
 const initialForm = {
   age: 20,
@@ -72,141 +73,112 @@ const ScorePredictionForm = ({ onPrediction }) => {
     setLoading(false);
   };
 
+  const fields = [
+    { label: "Age", name: "age", type: "number", min: 10, max: 30, step: 1 },
+    {
+      label: "Gender",
+      name: "gender",
+      type: "select",
+      options: ["Male", "Female", "Other"],
+    },
+    {
+      label: "Study Hours Per Day",
+      name: "study_hours_per_day",
+      type: "number",
+      min: 0,
+      max: 24,
+      step: 0.1,
+    },
+    {
+      label: "Social Media Hours",
+      name: "social_media_hours",
+      type: "number",
+      min: 0,
+      max: 24,
+      step: 0.1,
+    },
+    {
+      label: "Netflix Hours",
+      name: "netflix_hours",
+      type: "number",
+      min: 0,
+      max: 24,
+      step: 0.1,
+    },
+    {
+      label: "Part Time Job",
+      name: "part_time_job",
+      type: "select",
+      options: ["Yes", "No"],
+    },
+    {
+      label: "Attendance Percentage",
+      name: "attendance_percentage",
+      type: "number",
+      min: 0,
+      max: 100,
+      step: 0.1,
+    },
+    {
+      label: "Sleep Hours",
+      name: "sleep_hours",
+      type: "number",
+      min: 0,
+      max: 24,
+      step: 0.1,
+    },
+    {
+      label: "Diet Quality",
+      name: "diet_quality",
+      type: "select",
+      options: ["Good", "Fair", "Poor"],
+    },
+    {
+      label: "Exercise Frequency (per week)",
+      name: "exercise_frequency",
+      type: "number",
+      min: 0,
+      max: 20,
+      step: 1,
+    },
+    {
+      label: "Parental Education Level",
+      name: "parental_education_level",
+      type: "select",
+      options: ["No Formal Education", "High School", "Bachelor", "Master"],
+    },
+    {
+      label: "Internet Quality",
+      name: "internet_quality",
+      type: "select",
+      options: ["Good", "Average", "Poor"],
+    },
+    {
+      label: "Mental Health Rating (1-10)",
+      name: "mental_health_rating",
+      type: "number",
+      min: 1,
+      max: 10,
+      step: 1,
+    },
+    {
+      label: "Extracurricular Participation",
+      name: "extracurricular_participation",
+      type: "select",
+      options: ["Yes", "No"],
+    },
+  ];
+
   return (
-    <form
-      onSubmit={handleSubmit}
-      style={{
-        maxWidth: 900,
-        margin: "2rem auto",
-        padding: "2rem",
-        backgroundColor: "#232642",
-        borderRadius: "20px",
-        display: "grid",
-        gridTemplateColumns: "repeat(4, 1fr)",
-        gap: "1.4rem 2rem",
-        color: "#bcd0ee",
-      }}
-    >
-      {[
-        {
-          label: "Age",
-          name: "age",
-          type: "number",
-          min: 10,
-          max: 30,
-          step: 1,
-        },
-        {
-          label: "Gender",
-          name: "gender",
-          type: "select",
-          options: ["Male", "Female", "Other"],
-        },
-        {
-          label: "Study Hours Per Day",
-          name: "study_hours_per_day",
-          type: "number",
-          min: 0,
-          max: 24,
-          step: 0.1,
-        },
-        {
-          label: "Social Media Hours",
-          name: "social_media_hours",
-          type: "number",
-          min: 0,
-          max: 24,
-          step: 0.1,
-        },
-        {
-          label: "Netflix Hours",
-          name: "netflix_hours",
-          type: "number",
-          min: 0,
-          max: 24,
-          step: 0.1,
-        },
-        {
-          label: "Part Time Job",
-          name: "part_time_job",
-          type: "select",
-          options: ["Yes", "No"],
-        },
-        {
-          label: "Attendance Percentage",
-          name: "attendance_percentage",
-          type: "number",
-          min: 0,
-          max: 100,
-          step: 0.1,
-        },
-        {
-          label: "Sleep Hours",
-          name: "sleep_hours",
-          type: "number",
-          min: 0,
-          max: 24,
-          step: 0.1,
-        },
-        {
-          label: "Diet Quality",
-          name: "diet_quality",
-          type: "select",
-          options: ["Good", "Fair", "Poor"],
-        },
-        {
-          label: "Exercise Frequency (per week)",
-          name: "exercise_frequency",
-          type: "number",
-          min: 0,
-          max: 20,
-          step: 1,
-        },
-        {
-          label: "Parental Education Level",
-          name: "parental_education_level",
-          type: "select",
-          options: ["No Formal Education", "High School", "Bachelor", "Master"],
-        },
-        {
-          label: "Internet Quality",
-          name: "internet_quality",
-          type: "select",
-          options: ["Good", "Average", "Poor"],
-        },
-        {
-          label: "Mental Health Rating (1-10)",
-          name: "mental_health_rating",
-          type: "number",
-          min: 1,
-          max: 10,
-          step: 1,
-        },
-        {
-          label: "Extracurricular Participation",
-          name: "extracurricular_participation",
-          type: "select",
-          options: ["Yes", "No"],
-        },
-      ].map(({ label, name, type, min, max, step, options }) => (
-        <div key={name} style={{ display: "flex", flexDirection: "column" }}>
-          <label style={{ marginBottom: "0.4rem", fontWeight: "600" }}>
-            {label}:
-          </label>
+    <form className="score-form" onSubmit={handleSubmit}>
+      {fields.map(({ label, name, type, min, max, step, options }) => (
+        <div key={name} className="field">
+          <label>{label}:</label>
           {type === "select" ? (
             <select
               name={name}
               value={form[name]}
               onChange={handleChange}
-              style={{
-                padding: "0.63rem 1rem",
-                background: "#1c2040",
-                border: "1.8px solid #303458",
-                color: "#fff",
-                borderRadius: "14px",
-                fontSize: "1rem",
-                outline: "none",
-              }}
               required
             >
               {options.map((opt) => (
@@ -224,43 +196,13 @@ const ScorePredictionForm = ({ onPrediction }) => {
               step={step}
               value={form[name]}
               onChange={handleChange}
-              style={{
-                padding: "0.63rem 1rem",
-                background: "#1c2040",
-                border: "1.8px solid #303458",
-                color: "#fff",
-                borderRadius: "14px",
-                fontSize: "1rem",
-                outline: "none",
-              }}
               required
             />
           )}
         </div>
       ))}
 
-      {/* Submit Button with inline loader */}
-      <button
-        type="submit"
-        disabled={loading}
-        style={{
-          gridColumn: "span 4",
-          padding: "0.9rem 0",
-          fontSize: "1.1rem",
-          fontWeight: "700",
-          borderRadius: "18px",
-          border: "none",
-          background: "linear-gradient(90deg, #5a69f7 35%, #7c3aed 100%)",
-          color: "#fff",
-          cursor: "pointer",
-          boxShadow: "0 4px 18px #222242bb",
-          marginTop: "1rem",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          gap: "0.6rem",
-        }}
-      >
+      <button type="submit" disabled={loading} className="submit-btn">
         {loading ? (
           <Loader overlay={false} size="small" />
         ) : (
@@ -268,19 +210,7 @@ const ScorePredictionForm = ({ onPrediction }) => {
         )}
       </button>
 
-      {err && (
-        <div
-          style={{
-            gridColumn: "span 4",
-            color: "#ff7272",
-            fontWeight: "700",
-            marginTop: "0.8rem",
-            textAlign: "center",
-          }}
-        >
-          {err}
-        </div>
-      )}
+      {err && <div className="error">{err}</div>}
     </form>
   );
 };
