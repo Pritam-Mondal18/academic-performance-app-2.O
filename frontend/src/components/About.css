@@ -1,0 +1,55 @@
+.about-container {
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 2.5rem;
+  border-radius: 16px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+/* Dark Mode Styles */
+.about-container.dark {
+  background: #2b2e4b;
+  color: #bcd0ee;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
+}
+
+.about-container.dark .about-title {
+  color: #fff;
+}
+
+/* Light Mode Styles */
+.about-container.light {
+  background: linear-gradient(to right, #c2e0f5, #e8c6f2);
+  color: #222;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+}
+
+.about-container.light .about-title {
+  color: #1c2040;
+}
+
+.about-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-family: "Joella", cursive;
+}
+
+.about-text {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  font-family: "Superstar", sans-serif;
+}
+
+.about-text ul {
+  padding-left: 1.5rem;
+  margin: 1rem 0;
+}
+
+.about-text li {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
