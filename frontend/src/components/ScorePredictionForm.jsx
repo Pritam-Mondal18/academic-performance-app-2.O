@@ -54,7 +54,7 @@ const ScorePredictionForm = ({ onPrediction, darkMode }) => {
         extracurricular_participation: form.extracurricular_participation,
       };
 
-      const response = await fetch("http://localhost:8000/api/predict", {
+      const response = await fetch("https://academic-performance-app-2-o.onrender.com/api/predict", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
