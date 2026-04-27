@@ -5,12 +5,19 @@ import joblib
 import os
 import pandas as pd
 
-app = FastAPI()
+# app = FastAPI()
+app = FastAPI(
+    title="Academic Performance API",
+    docs_url="/docs",
+    redoc_url="/redoc",
+    openapi_url="/openapi.json"
+)
 
 # CORS allowing frontend origin (change to your frontend URL and port)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],  # Example: Vite default frontend port
+    # allow_origins=["http://localhost:5173"],  # Example: Vite default frontend port
+    allow_origins=["*"],
     allow_methods=["*"],
     allow_headers=["*"],
     allow_credentials=True,
